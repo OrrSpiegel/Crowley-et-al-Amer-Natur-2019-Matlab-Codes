@@ -1,0 +1,16 @@
+function [ FF ] = FDraw( Cumbeta,Fx,res )
+%FDRAW draws a random fitness value from the beta distribution of fitnesses
+ 
+frac = rand;
+i = 1;        %Initialize accumulator 
+while (Cumbeta(i)<frac)&&(i<res)
+    i = i + 1;
+end
+if i == 1
+    Cmin = 0;
+else
+    Cmin = Cumbeta(i-1);
+end
+ffrac = i/res - (1/res)*(Cumbeta(i)-frac)/(Cumbeta(i)-Cmin);
+FF = ffrac*Fx;
+
